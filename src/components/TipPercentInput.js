@@ -6,15 +6,23 @@ const tipOptions = [
 ];
 
 export default function TipPercentInput({
+  index,
   id,
-  children,
-  tipPercent,
+  tipPercents,
   onTipChange,
 }) {
   return (
     <div className="input">
-      <label htmlFor={id}>{children}</label>
-      <select id={id} value={tipPercent} onChange={onTipChange}>
+      <label htmlFor={id}>
+        {index === 0
+          ? "How did you like the service?"
+          : `How did your friend #${index} likes the service?`}
+      </label>
+      <select
+        id={id}
+        value={tipPercents[index]}
+        onChange={(e) => onTipChange(e, index)}
+      >
         {tipOptions.map((option) => (
           <option value={option.percent} key={option.title}>
             {option.title}
